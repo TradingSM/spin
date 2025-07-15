@@ -131,9 +131,10 @@ button:hover {
 
 .pointer {
     position: absolute;
-    top: -20px;
+    bottom: -20px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) rotate(180deg);
     font-size: 2rem;
     color: #FFD700;
-    text-s
+    text-shadow: 0 0 5px #FFD700;
+}
