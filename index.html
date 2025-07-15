@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Diamond Roulette</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+    <div class="container">
+        <h1>💎 Diamond Roulette 💎</h1>
+        <div class="diamonds">Diamonds: <span id="diamonds">100</span></div>
+        <button id="spin">Spin Roulette</button>
+        <div id="result"></div>
+        <button id="reset">Reset to 100</button>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
