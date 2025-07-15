@@ -12,16 +12,21 @@ colorChoices.forEach(choice => {
     choice.addEventListener('click', () => {
         colorChoices.forEach(c => c.classList.remove('active'));
         choice.classList.add('active');
-        chosenColor = choice.getAttribute('data-color');
+        chosenColor = choice.dataset.color;
         resultEl.textContent = `You selected: ${chosenColor.toUpperCase()}`;
     });
 });
 
 document.getElementById('spin').addEventListener('click', () => {
-    const stake = Math.max(1, parseInt(stakeInput.value));
+    if (spinning) return;
 
-    if (spinning || diamonds <= 0 || stake > diamonds) {
-        resultEl.textContent = stake > diamonds ? "❗ Cannot bet more than your diamonds." : "";
+    const stake = parseInt(stakeInput.value);
+    if (isNaN(stake) || stake <= 0) {
+        resultEl.textContent = "❗ Invalid stake amount.";
+        return;
+    }
+    if (stake > diamonds) {
+        resultEl.textContent = "❗ Cannot bet more than your diamonds.";
         return;
     }
 
@@ -37,24 +42,23 @@ document.getElementById('spin').addEventListener('click', () => {
     setTimeout(() => {
         const normalizedAngle = currentRotation % 360;
         let resultColor;
-
         if ((normalizedAngle >= 90 && normalizedAngle < 180) || (normalizedAngle >= 270 && normalizedAngle < 360)) {
             resultColor = 'red';
         } else {
             resultColor = 'green';
         }
 
-        let result;
+        let resultMessage;
         if (chosenColor === resultColor) {
             const winnings = stake * 2;
             diamonds += winnings;
-            result = `✅ ${chosenColor.toUpperCase()} wins! You get ${winnings} diamonds.`;
+            resultMessage = `✅ ${resultColor.toUpperCase()} wins! You gain ${winnings} diamonds.`;
         } else {
-            result = `❌ ${resultColor.toUpperCase()} wins! You lost ${stake} diamonds.`;
+            resultMessage = `❌ ${resultColor.toUpperCase()} wins! You lose ${stake} diamonds.`;
         }
 
         diamondsEl.textContent = diamonds;
-        resultEl.textContent = result;
+        resultEl.textContent = resultMessage;
         spinning = false;
     }, 4000);
 });
