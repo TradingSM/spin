@@ -43,10 +43,15 @@ document.getElementById('spin').addEventListener('click', () => {
         const normalizedAngle = currentRotation % 360;
         let resultColor;
 
-        if ((normalizedAngle >= 0 && normalizedAngle < 90) || (normalizedAngle >= 180 && normalizedAngle < 270)) {
-            resultColor = 'red';
-        } else {
+        if (
+            (normalizedAngle >= 0 && normalizedAngle < 45) ||
+            (normalizedAngle >= 90 && normalizedAngle < 135) ||
+            (normalizedAngle >= 180 && normalizedAngle < 225) ||
+            (normalizedAngle >= 270 && normalizedAngle < 315)
+        ) {
             resultColor = 'green';
+        } else {
+            resultColor = 'red';
         }
 
         let resultMessage;
