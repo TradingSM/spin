@@ -1,29 +1,25 @@
 let diamonds = 100;
 let currentRotation = 0;
-let chosenColor = null;
+let chosenColor = 'red'; // Default pre-selected
 const diamondsEl = document.getElementById('diamonds');
 const resultEl = document.getElementById('result');
 const stakeInput = document.getElementById('stake');
 const wheel = document.getElementById('wheel');
 let spinning = false;
 
-document.getElementById('choose-red').addEventListener('click', () => {
-    chosenColor = 'red';
-    resultEl.textContent = 'You selected: Red';
-});
-
-document.getElementById('choose-green').addEventListener('click', () => {
-    chosenColor = 'green';
-    resultEl.textContent = 'You selected: Green';
+const colorChoices = document.querySelectorAll('.color-choice');
+colorChoices.forEach(choice => {
+    choice.addEventListener('click', () => {
+        colorChoices.forEach(c => c.classList.remove('active'));
+        choice.classList.add('active');
+        chosenColor = choice.getAttribute('data-color');
+        resultEl.textContent = `You selected: ${chosenColor.charAt(0).toUpperCase() + chosenColor.slice(1)}`;
+    });
 });
 
 document.getElementById('spin').addEventListener('click', () => {
     const stake = Math.max(1, parseInt(stakeInput.value));
 
-    if (!chosenColor) {
-        resultEl.textContent = "Please select Red or Green!";
-        return;
-    }
     if (spinning || diamonds <= 0 || stake > diamonds) {
         resultEl.textContent = stake > diamonds ? "❗ Cannot bet more than your diamonds." : "";
         return;
@@ -46,9 +42,9 @@ document.getElementById('spin').addEventListener('click', () => {
         if (chosenColor === resultColor) {
             const winnings = stake * 2;
             diamonds += winnings;
-            result = `✅ Correct! ${chosenColor.toUpperCase()} wins. You get ${winnings} diamonds.`;
+            result = `✅ ${chosenColor.toUpperCase()} wins! You get ${winnings} diamonds.`;
         } else {
-            result = `❌ Wrong! ${resultColor.toUpperCase()} wins. You lost ${stake} diamonds.`;
+            result = `❌ ${resultColor.toUpperCase()} wins! You lost ${stake} diamonds.`;
         }
 
         diamondsEl.textContent = diamonds;
@@ -63,5 +59,7 @@ document.getElementById('reset').addEventListener('click', () => {
     diamondsEl.textContent = diamonds;
     resultEl.textContent = "";
     wheel.style.transform = 'rotate(0deg)';
-    chosenColor = null;
+    chosenColor = 'red';
+    colorChoices.forEach(c => c.classList.remove('active'));
+    document.querySelector('.red-circle').classList.add('active');
 });
