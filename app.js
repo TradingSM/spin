@@ -1,4 +1,5 @@
 let diamonds = 100;
+let currentRotation = 0;
 const diamondsEl = document.getElementById('diamonds');
 const resultEl = document.getElementById('result');
 const wheel = document.getElementById('wheel');
@@ -8,11 +9,14 @@ document.getElementById('spin').addEventListener('click', () => {
     if (spinning || diamonds <= 0) return;
     spinning = true;
 
-    const spinAngle = 360 * 5 + Math.floor(Math.random() * 360); // 5 full spins + random
-    wheel.style.transform = `rotate(${spinAngle}deg)`;
+    const extraSpins = 5;
+    const randomDegrees = Math.floor(Math.random() * 360);
+    currentRotation += 360 * extraSpins + randomDegrees;
+
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
 
     setTimeout(() => {
-        const normalizedAngle = spinAngle % 360;
+        const normalizedAngle = currentRotation % 360;
         let result;
         if ((normalizedAngle >= 0 && normalizedAngle < 90) || (normalizedAngle >= 180 && normalizedAngle < 270)) {
             diamonds += 20;
@@ -29,6 +33,7 @@ document.getElementById('spin').addEventListener('click', () => {
 
 document.getElementById('reset').addEventListener('click', () => {
     diamonds = 100;
+    currentRotation = 0;
     diamondsEl.textContent = diamonds;
     resultEl.textContent = "";
     wheel.style.transform = 'rotate(0deg)';
