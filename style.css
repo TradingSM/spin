@@ -135,8 +135,8 @@ button:hover {
     left: 50%;
     transform: translateX(-50%) rotate(180deg);
     font-size: 2rem;
-    color: #FFD700;
-    text-shadow: 0 0 5px #FFD700;
+    color: #ffffff;
+    text-shadow: 0 0 5px #000000;
 }
 
 
