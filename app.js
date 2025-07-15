@@ -44,9 +44,9 @@ document.getElementById('spin').addEventListener('click', () => {
         let resultColor;
 
         if ((normalizedAngle >= 0 && normalizedAngle < 90) || (normalizedAngle >= 180 && normalizedAngle < 270)) {
-            resultColor = 'green';
-        } else {
             resultColor = 'red';
+        } else {
+            resultColor = 'green';
         }
 
         let resultMessage;
