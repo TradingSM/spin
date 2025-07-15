@@ -54,9 +54,9 @@ spinButton.addEventListener('click', () => {
             (normalizedAngle >= 180 && normalizedAngle < 225) ||
             (normalizedAngle >= 270 && normalizedAngle < 315)
         ) {
-            resultColor = 'green';
-        } else {
             resultColor = 'red';
+        } else {
+            resultColor = 'green';
         }
 
         let resultMessage;
