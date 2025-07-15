@@ -7,15 +7,15 @@ const wheel = document.getElementById('wheel');
 let spinning = false;
 
 document.getElementById('spin').addEventListener('click', () => {
-    const stake = parseInt(stakeInput.value);
+    const stake = Math.max(1, parseInt(stakeInput.value)); // Prevent 0 or NaN
 
-    if (spinning || diamonds <= 0 || isNaN(stake) || stake <= 0) return;
-    if (stake > diamonds) {
-        resultEl.textContent = "❗ Cannot bet more than your diamonds.";
+    if (spinning || diamonds <= 0 || stake > diamonds) {
+        resultEl.textContent = stake > diamonds ? "❗ Cannot bet more than your diamonds." : "";
         return;
     }
 
     spinning = true;
+
     diamonds -= stake;
     diamondsEl.textContent = diamonds;
 
@@ -29,8 +29,9 @@ document.getElementById('spin').addEventListener('click', () => {
         const normalizedAngle = currentRotation % 360;
         let result;
         if ((normalizedAngle >= 0 && normalizedAngle < 90) || (normalizedAngle >= 180 && normalizedAngle < 270)) {
-            diamonds += stake * 2;
-            result = `💎 You won ${stake * 2} diamonds!`;
+            const winnings = stake * 2;
+            diamonds += winnings;
+            result = `💎 You won ${winnings} diamonds!`;
         } else {
             result = `💔 You lost ${stake} diamonds!`;
         }
