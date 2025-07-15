@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
 body {
-    font-family: sans-serif;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle, #0d0d0d 0%, #1c1c1c 100%);
+    color: #f5f5f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,38 +13,57 @@ body {
 
 .container {
     text-align: center;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 30px;
-    border-radius: 15px;
+    background: linear-gradient(145deg, #101010, #1a1a1a);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    border: 2px solid #FFD700;
 }
 
 h1 {
+    font-size: 2rem;
     margin-bottom: 20px;
+    color: #FFD700;
+    text-shadow: 0 0 10px #FFD700;
 }
 
 button {
-    padding: 10px 20px;
-    margin: 10px;
+    padding: 12px 30px;
+    margin: 12px;
     font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+    border: 2px solid #FFD700;
+    background-color: #000;
+    color: #FFD700;
+    border-radius: 10px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #FFD700;
+    color: #000;
+    box-shadow: 0 0 15px #FFD700;
 }
 
 .diamonds {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin: 20px 0;
+    color: #fff;
 }
 
 #wheel {
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
-    border: 5px solid #fff;
+    border: 8px solid #FFD700;
     background: conic-gradient(
-        #28a745 0deg 90deg,
-        #dc3545 90deg 180deg,
-        #28a745 180deg 270deg,
-        #dc3545 270deg 360deg
+        #2ecc71 0deg 90deg,
+        #e74c3c 90deg 180deg,
+        #2ecc71 180deg 270deg,
+        #e74c3c 270deg 360deg
     );
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5);
     transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
@@ -54,14 +75,16 @@ button {
 
 .pointer {
     position: absolute;
-    top: -15px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 2rem;
-    color: #fff;
+    color: #FFD700;
+    text-shadow: 0 0 5px #FFD700;
 }
 
 #result {
     margin: 20px 0;
     font-size: 1.3rem;
+    color: #FFD700;
 }
