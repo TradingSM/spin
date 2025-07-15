@@ -14,7 +14,7 @@ body {
     background: linear-gradient(145deg, #1b1b1b, #101010);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8), 0 0 10px rgba(255,215,0,0.15);
+    box-shadow: 0 0 10px rgba(0,0,0,0.8), 0 0 5px rgba(255,215,0,0.2);
     border: 1px solid rgba(255, 215, 0, 0.4);
 }
 
@@ -22,12 +22,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     color: #FFD700;
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
     margin-bottom: 20px;
-    gap: 15px;
+    gap: 10px;
 }
 
 .headline-text {
@@ -35,9 +35,8 @@ body {
 }
 
 .diamond-icon {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     color: #FFFFFF;
-    text-shadow: 0 0 6px rgba(255,255,255,0.3);
 }
 
 button {
@@ -45,7 +44,7 @@ button {
     margin: 12px;
     font-size: 1.1rem;
     border: 2px solid #FFD700;
-    background: linear-gradient(145deg, #222, #111);
+    background: #1a1a1a;
     color: #FFD700;
     border-radius: 10px;
     cursor: pointer;
@@ -53,7 +52,7 @@ button {
 }
 
 button:hover {
-    background: #FFD700;
+    background-color: #FFD700;
     color: #000;
     box-shadow: 0 0 10px #FFD700;
 }
@@ -61,7 +60,6 @@ button:hover {
 .diamonds {
     font-size: 1.6rem;
     margin: 20px 0;
-    color: #fff;
 }
 
 .stake-container {
@@ -102,18 +100,16 @@ button:hover {
 }
 
 .color-choice.red-circle {
-    background: radial-gradient(circle at 30% 30%, #FF4D4D 0%, #7B241C 100%);
-    box-shadow: inset 0 0 5px #FF4D4D, 0 0 10px rgba(255, 77, 77, 0.3);
+    background: radial-gradient(circle at 30% 30%, #C0392B 0%, #7B241C 100%);
 }
 
 .color-choice.green-circle {
-    background: radial-gradient(circle at 30% 30%, #33FF66 0%, #145A32 100%);
-    box-shadow: inset 0 0 5px #33FF66, 0 0 10px rgba(51, 255, 102, 0.3);
+    background: radial-gradient(circle at 30% 30%, #2ECC71 0%, #145A32 100%);
 }
 
 .color-choice.active {
     border-color: #FFD700;
-    box-shadow: 0 0 15px #FFD700, inset 0 0 5px #FFD700;
+    box-shadow: 0 0 10px #FFD700;
 }
 
 #wheel {
@@ -122,16 +118,16 @@ button:hover {
     border-radius: 50%;
     border: 8px solid #FFD700;
     background: conic-gradient(
-        #33FF66 0deg 45deg,
+        #2ECC71 0deg 45deg,
         #C0392B 45deg 90deg,
-        #33FF66 90deg 135deg,
+        #2ECC71 90deg 135deg,
         #C0392B 135deg 180deg,
-        #33FF66 180deg 225deg,
+        #2ECC71 180deg 225deg,
         #C0392B 225deg 270deg,
-        #33FF66 270deg 315deg,
+        #2ECC71 270deg 315deg,
         #C0392B 315deg 360deg
     );
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.3);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.2);
     transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
@@ -145,7 +141,7 @@ button:hover {
     position: absolute;
     top: -16px;
     left: 50%;
-    transform: translateX(-50%) rotate(180deg);
+    transform: translateX(-50%);
     font-size: 1.8rem;
     color: #FFF;
     text-shadow: 0 0 3px #FFD700;
