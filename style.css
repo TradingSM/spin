@@ -52,6 +52,23 @@ button:hover {
     color: #fff;
 }
 
+.stake-container {
+    margin: 15px 0;
+    color: #FFD700;
+    font-size: 1.1rem;
+}
+
+#stake {
+    width: 80px;
+    padding: 5px;
+    margin-left: 10px;
+    background: #000;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    border-radius: 6px;
+    text-align: center;
+}
+
 #wheel {
     width: 220px;
     height: 220px;
