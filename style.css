@@ -41,10 +41,16 @@ button {
     transition: 0.3s;
 }
 
-button:hover {
+button:hover:enabled {
     background-color: #FFD700;
     color: #0b0b0b;
     box-shadow: 0 0 10px #FFD700;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 .diamonds {
@@ -137,8 +143,25 @@ button:hover {
     color: #FFFFFF;
 }
 
+#result-container {
+    min-height: 2.5em; /* Fixed height prevents layout shift */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #result {
-    margin: 20px 0;
     font-size: 1.3rem;
+    color: #FFD700;
+    transition: 0.3s;
+}
+
+#result.win {
     color: #00C8FF;
+    text-shadow: 0 0 10px #00C8FF;
+}
+
+#result.lose {
+    color: #FFD700;
+    text-shadow: none;
 }
