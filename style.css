@@ -32,6 +32,35 @@ button {
     margin: 20px 0;
 }
 
+#wheel {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    background: conic-gradient(
+        #28a745 0deg 90deg,
+        #dc3545 90deg 180deg,
+        #28a745 180deg 270deg,
+        #dc3545 270deg 360deg
+    );
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.wheel-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px 0;
+}
+
+.pointer {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: #fff;
+}
+
 #result {
     margin: 20px 0;
     font-size: 1.3rem;
