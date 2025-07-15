@@ -13,7 +13,7 @@ colorChoices.forEach(choice => {
         colorChoices.forEach(c => c.classList.remove('active'));
         choice.classList.add('active');
         chosenColor = choice.getAttribute('data-color');
-        resultEl.textContent = `You selected: ${chosenColor.charAt(0).toUpperCase() + chosenColor.slice(1)}`;
+        resultEl.textContent = `You selected: ${chosenColor.toUpperCase()}`;
     });
 });
 
