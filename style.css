@@ -1,6 +1,6 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background: radial-gradient(circle at center, #0d0d0d 0%, #1a1a1a 100%);
+    background: radial-gradient(circle at center, #121212 0%, #0a0a0a 100%);
     color: #f5f5f5;
     display: flex;
     justify-content: center;
@@ -11,11 +11,11 @@ body {
 
 .container {
     text-align: center;
-    background: linear-gradient(145deg, #101010, #1a1a1a);
+    background: linear-gradient(145deg, #1a1a1a, #121212);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-    border: 2px solid #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+    border: 1px solid #FFD700;
 }
 
 .headline {
@@ -24,39 +24,37 @@ body {
     align-items: center;
     font-size: 2.4rem;
     color: #FFD700;
-    text-shadow: 0 0 20px #FFD700;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
     margin-bottom: 20px;
     gap: 15px;
 }
 
 .headline-text {
-    font-weight: 600;
     letter-spacing: 0.1em;
 }
 
 .diamond-icon {
     font-size: 2.4rem;
     color: #FFFFFF;
-    filter: drop-shadow(0 0 6px #FFD700);
 }
 
 button {
     padding: 12px 30px;
     margin: 12px;
     font-size: 1.1rem;
-    border: none;
+    border: 2px solid #FFD700;
     background-color: #1a1a1a;
     color: #FFD700;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 0 0 2px #FFD700;
+    transition: 0.3s;
 }
 
 button:hover {
     background-color: #FFD700;
     color: #000;
-    box-shadow: 0 0 20px #FFD700;
+    box-shadow: 0 0 10px #FFD700;
 }
 
 .diamonds {
@@ -76,16 +74,14 @@ button:hover {
 }
 
 #stake {
-    width: 100px;
+    width: 80px;
     padding: 10px;
     font-size: 1.2rem;
-    font-family: inherit;
-    color: #FFD700;
     background-color: #000;
+    color: #FFD700;
     border: 2px solid #FFD700;
     border-radius: 8px;
     text-align: center;
-    transition: all 0.3s ease;
 }
 
 #stake:focus {
@@ -106,21 +102,20 @@ button:hover {
     border-radius: 50%;
     cursor: pointer;
     border: 3px solid transparent;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    transition: 0.3s;
 }
 
 .color-choice.red-circle {
-    background: radial-gradient(circle, #FF4D4D 0%, #8B0000 100%);
+    background: linear-gradient(145deg, #C0392B, #7B241C);
 }
 
 .color-choice.green-circle {
-    background: radial-gradient(circle, #33FF66 0%, #006400 100%);
+    background: linear-gradient(145deg, #2ECC71, #145A32);
 }
 
 .color-choice.active {
     border-color: #FFD700;
-    box-shadow: 0 0 15px #FFD700, inset 0 0 5px #FFD700;
+    box-shadow: 0 0 10px #FFD700;
 }
 
 #wheel {
@@ -129,16 +124,16 @@ button:hover {
     border-radius: 50%;
     border: 10px solid #FFD700;
     background: conic-gradient(
-        #33FF66 0deg 45deg,
-        #FF4D4D 45deg 90deg,
-        #33FF66 90deg 135deg,
-        #FF4D4D 135deg 180deg,
-        #33FF66 180deg 225deg,
-        #FF4D4D 225deg 270deg,
-        #33FF66 270deg 315deg,
-        #FF4D4D 315deg 360deg
+        #2ECC71 0deg 45deg,
+        #C0392B 45deg 90deg,
+        #2ECC71 90deg 135deg,
+        #C0392B 135deg 180deg,
+        #2ECC71 180deg 225deg,
+        #C0392B 225deg 270deg,
+        #2ECC71 270deg 315deg,
+        #C0392B 315deg 360deg
     );
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.5);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.4);
     transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
@@ -150,12 +145,11 @@ button:hover {
 
 .pointer {
     position: absolute;
-    top: -20px;
+    top: -16px;
     left: 50%;
     transform: translateX(-50%) rotate(180deg);
-    font-size: 2rem;
-    color: #ffffff;
-    text-shadow: 0 0 5px #000000;
+    font-size: 1.8rem;
+    color: #FFF;
 }
 
 #result {
