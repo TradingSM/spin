@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Outfit', sans-serif;
-    background: radial-gradient(circle, #0d0d0d 0%, #1c1c1c 100%);
+    background: radial-gradient(circle at center, #0d0d0d 0%, #1a1a1a 100%);
     color: #f5f5f5;
     display: flex;
     justify-content: center;
