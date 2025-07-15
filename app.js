@@ -1,6 +1,6 @@
 let diamonds = 100;
 let currentRotation = 0;
-let chosenColor = 'red'; // Default pre-selected
+let chosenColor = 'red';
 const diamondsEl = document.getElementById('diamonds');
 const resultEl = document.getElementById('result');
 const stakeInput = document.getElementById('stake');
@@ -36,7 +36,13 @@ document.getElementById('spin').addEventListener('click', () => {
 
     setTimeout(() => {
         const normalizedAngle = currentRotation % 360;
-        let resultColor = (normalizedAngle >= 0 && normalizedAngle < 90) || (normalizedAngle >= 180 && normalizedAngle < 270) ? 'green' : 'red';
+        let resultColor;
+
+        if ((normalizedAngle >= 90 && normalizedAngle < 180) || (normalizedAngle >= 270 && normalizedAngle < 360)) {
+            resultColor = 'red';
+        } else {
+            resultColor = 'green';
+        }
 
         let result;
         if (chosenColor === resultColor) {
