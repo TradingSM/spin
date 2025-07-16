@@ -110,23 +110,28 @@ button:disabled {
 }
 
 #wheel {
-    width: 240px;
-    height: 240px;
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
-    border: 8px solid #FFD700;
+    border: 10px solid #FFD700;
     background: conic-gradient(
-        #2ECC71 0deg 45deg,
-        #C0392B 45deg 90deg,
-        #2ECC71 90deg 135deg,
-        #C0392B 135deg 180deg,
-        #2ECC71 180deg 225deg,
-        #C0392B 225deg 270deg,
-        #2ECC71 270deg 315deg,
-        #C0392B 315deg 360deg
+        #28b463 0deg 45deg,
+        #c0392b 45deg 90deg,
+        #28b463 90deg 135deg,
+        #c0392b 135deg 180deg,
+        #28b463 180deg 225deg,
+        #c0392b 225deg 270deg,
+        #28b463 270deg 315deg,
+        #c0392b 315deg 360deg
     );
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.2);
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.6),
+        inset 0 0 50px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 215, 0, 0.4);
+    background-clip: padding-box;
     transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
 }
+
 
 .wheel-container {
     position: relative;
