@@ -1,3 +1,4 @@
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-color: #0b0b0b;
@@ -109,50 +110,6 @@ button:disabled {
     box-shadow: 0 0 10px #00C8FF;
 }
 
-.wheel-container {
-    position: relative;
-    display: inline-block;
-    margin: 20px 0;
-}
-
-.wheel-container::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    box-shadow: 0 0 20px #FFD700, 0 0 40px rgba(255, 215, 0, 0.6);
-    animation: wheelPulse 2s infinite;
-    z-index: -1;
-}
-
-@keyframes wheelPulse {
-    0% {
-        box-shadow: 0 0 10px #FFD700, 0 0 20px rgba(255, 215, 0, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 20px #FFD700, 0 0 40px rgba(255, 215, 0, 0.6);
-    }
-    100% {
-        box-shadow: 0 0 10px #FFD700, 0 0 20px rgba(255, 215, 0, 0.4);
-    }
-}
-
-.wheel-spinning .wheel-container::before {
-    animation: wheelFlicker 0.3s infinite;
-}
-
-@keyframes wheelFlicker {
-    0%, 100% {
-        box-shadow: 0 0 30px #FFD700, 0 0 50px rgba(255, 215, 0, 0.9);
-    }
-    50% {
-        box-shadow: 0 0 10px #FFD700, 0 0 20px rgba(255, 215, 0, 0.3);
-    }
-}
-
 #wheel {
     width: 240px;
     height: 240px;
@@ -172,6 +129,12 @@ button:disabled {
     transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
+.wheel-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px 0;
+}
+
 .pointer {
     position: absolute;
     top: -16px;
@@ -182,7 +145,7 @@ button:disabled {
 }
 
 #result-container {
-    min-height: 2.5em;
+    min-height: 2.5em; /* Fixed height prevents layout shift */
     display: flex;
     align-items: center;
     justify-content: center;
