@@ -5,6 +5,7 @@ const diamondsEl = document.getElementById('diamonds');
 const resultEl = document.getElementById('result');
 const stakeInput = document.getElementById('stake');
 const wheel = document.getElementById('wheel');
+const spinButton = document.getElementById('spin');
 let spinning = false;
 
 const colorChoices = document.querySelectorAll('.color-choice');
@@ -13,27 +14,30 @@ colorChoices.forEach(choice => {
         colorChoices.forEach(c => c.classList.remove('active'));
         choice.classList.add('active');
         chosenColor = choice.dataset.color;
+        resultEl.textContent = `You selected: ${chosenColor.toUpperCase()}`;
+        resultEl.className = "";
     });
 });
 
-document.getElementById('spin').addEventListener('click', () => {
+spinButton.addEventListener('click', () => {
     if (spinning) return;
 
     const stake = parseInt(stakeInput.value);
     if (isNaN(stake) || stake <= 0) {
         resultEl.textContent = "❗ Invalid stake amount.";
+        resultEl.className = "lose";
         return;
     }
     if (stake > diamonds) {
         resultEl.textContent = "❗ Cannot bet more than your diamonds.";
+        resultEl.className = "lose";
         return;
     }
 
     spinning = true;
+    spinButton.disabled = true;
     diamonds -= stake;
     diamondsEl.textContent = diamonds;
-    document.querySelector('.wheel-container').classList.add('wheel-spinning');
-    document.getElementById('spin').disabled = true;
 
     const extraSpins = 5;
     const randomDegrees = Math.floor(Math.random() * 360);
@@ -43,6 +47,7 @@ document.getElementById('spin').addEventListener('click', () => {
     setTimeout(() => {
         const normalizedAngle = currentRotation % 360;
         let resultColor;
+
         if (
             (normalizedAngle >= 0 && normalizedAngle < 45) ||
             (normalizedAngle >= 90 && normalizedAngle < 135) ||
@@ -59,17 +64,16 @@ document.getElementById('spin').addEventListener('click', () => {
             const winnings = stake * 2;
             diamonds += winnings;
             resultMessage = `✅ ${resultColor.toUpperCase()} wins! You gain ${winnings} diamonds.`;
-            resultEl.className = 'win';
+            resultEl.className = "win";
         } else {
             resultMessage = `❌ ${resultColor.toUpperCase()} wins! You lose ${stake} diamonds.`;
-            resultEl.className = 'lose';
+            resultEl.className = "lose";
         }
 
         diamondsEl.textContent = diamonds;
         resultEl.textContent = resultMessage;
+        spinButton.disabled = false;
         spinning = false;
-        document.querySelector('.wheel-container').classList.remove('wheel-spinning');
-        document.getElementById('spin').disabled = false;
     }, 4000);
 });
 
@@ -78,6 +82,7 @@ document.getElementById('reset').addEventListener('click', () => {
     currentRotation = 0;
     diamondsEl.textContent = diamonds;
     resultEl.textContent = "";
+    resultEl.className = "";
     wheel.style.transform = 'rotate(0deg)';
     chosenColor = 'red';
     colorChoices.forEach(c => c.classList.remove('active'));
