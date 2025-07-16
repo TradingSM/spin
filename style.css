@@ -1,300 +1,168 @@
-/* General Body and Container Styles */
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background-color: #0d0d1a; /* Very dark blue-gray */
-    color: #ffffff; /* White text for contrast */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: #0b0b0b;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Full viewport height */
+    height: 100vh;
     margin: 0;
-    overflow: hidden; /* Prevent scrollbars from animations */
-    perspective: 1000px; /* For subtle 3D effects later if desired */
 }
 
 .container {
-    background-color: #1a1a2b; /* Slightly lighter dark blue-gray for the container */
-    padding: 2.5rem; /* 40px padding */
-    border-radius: 1.5rem; /* More rounded corners (24px) */
-    border: 2px solid #FFD700; /* Gold border */
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7), /* Stronger dark shadow */
-                0 0 80px rgba(255, 215, 0, 0.2); /* Subtle gold glow for depth */
     text-align: center;
-    position: relative;
-    z-index: 1; /* Ensure container is above any background effects */
-    overflow: hidden; /* Keep child elements within bounds */
-    transform: translateZ(0); /* For consistent rendering */
+    background-color: #0b0b0b;
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
 
-/* Background particle/gradient effect for the container */
-.container::before {
-    content: '';
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.03) 0%, transparent 60%);
-    animation: subtle-pulse 15s infinite alternate ease-in-out;
-    z-index: -1;
-    opacity: 0.5;
-    pointer-events: none; /* Allows clicks to pass through */
-}
-
-@keyframes subtle-pulse {
-    0% { transform: scale(1) rotate(0deg); opacity: 0.5; }
-    50% { transform: scale(1.1) rotate(5deg); opacity: 0.6; }
-    100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
-}
-
-/* Logo Styling */
 .logo-container {
-    margin-bottom: 2rem; /* 32px margin */
+    margin-bottom: 30px;
 }
 
 .logo {
-    width: 250px; /* Slightly adjusted size */
+    width: 300px;
     height: auto;
     display: block;
     margin: 0 auto;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); /* Stronger glow for the logo */
-    animation: logo-float 4s ease-in-out infinite alternate; /* Subtle floating animation */
 }
 
-@keyframes logo-float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0px); }
+button {
+    padding: 12px 30px;
+    margin: 12px;
+    font-size: 1.1rem;
+    border: 2px solid #FFD700;
+    background: #0b0b0b;
+    color: #FFD700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* Diamonds Display */
+button:hover:enabled {
+    background-color: #FFD700;
+    color: #0b0b0b;
+    box-shadow: 0 0 10px #FFD700;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
 .diamonds {
-    font-size: 2rem; /* Larger font size */
-    font-weight: 700; /* Bold text */
-    margin: 1.5rem 0; /* 24px margin */
-    color: #00C8FF; /* Vibrant cyan for diamonds */
-    text-shadow: 0 0 10px rgba(0, 200, 255, 0.7); /* Matching glow */
+    font-size: 1.6rem;
+    margin: 20px 0;
+    color: #FFFFFF;
 }
 
-/* Stake Input Section */
 .stake-container {
-    margin: 1.5rem 0;
-    font-size: 1.3rem; /* Larger label font */
-    color: #FFD700; /* Gold color for label */
+    margin: 20px 0;
+    font-size: 1.2rem;
+    color: #FFD700;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.75rem; /* 12px gap */
-    font-weight: 600;
+    gap: 10px;
 }
 
 #stake {
-    width: 100px; /* Wider input field */
-    padding: 0.75rem; /* 12px padding */
-    font-size: 1.3rem;
-    background-color: #0d0d1a; /* Darker background for input */
-    color: #FFD700; /* Gold text */
-    border: 2px solid #FFD700; /* Gold border */
-    border-radius: 0.6rem; /* Slightly more rounded */
+    width: 80px;
+    padding: 10px;
+    font-size: 1.2rem;
+    background-color: #000;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    border-radius: 8px;
     text-align: center;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.9); /* Deep inset shadow for depth */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#stake:focus {
-    outline: none;
-    border-color: #00C8FF; /* Cyan focus border */
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 200, 255, 0.6); /* Cyan glow on focus */
-}
-
-/* Color Choice Buttons */
 .choice-container {
-    margin: 2rem 0; /* More vertical space */
+    margin: 20px 0;
     display: flex;
     justify-content: center;
-    gap: 2.5rem; /* Larger gap between circles */
+    gap: 30px;
 }
 
 .color-choice {
-    width: 65px; /* Larger circles */
-    height: 65px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
-    border: 4px solid transparent; /* Thicker transparent border */
-    transition: all 0.3s ease-in-out; /* Smooth transitions for all properties */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Pronounced shadow */
-    position: relative;
-    overflow: hidden; /* For inner glow effect */
-}
-
-/* Inner glow effect for color choices */
-.color-choice::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.color-choice:hover::before {
-    opacity: 1;
+    border: 3px solid transparent;
+    transition: 0.3s;
 }
 
 .color-choice.red-circle {
-    background: linear-gradient(145deg, #E74C3C, #C0392B); /* Bright red to deep red */
+    background: linear-gradient(145deg, #C0392B, #7B241C);
 }
 
 .color-choice.green-circle {
-    background: linear-gradient(145deg, #2ECC71, #27AE60); /* Bright green to deep green */
-}
-
-.color-choice:hover:not(.active) {
-    transform: scale(1.08); /* More pronounced scale on hover */
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    background: linear-gradient(145deg, #2ECC71, #145A32);
 }
 
 .color-choice.active {
-    border-color: #00C8FF; /* Cyan active border */
-    box-shadow: 0 0 20px #00C8FF, 0 0 40px rgba(0, 200, 255, 0.6); /* Stronger cyan glow */
-    transform: scale(1.15); /* More significant scale for active */
-    background: linear-gradient(145deg, #00C8FF, #0099CC); /* Active choice takes on a cyan gradient */
+    border-color: #00C8FF;
+    box-shadow: 0 0 10px #00C8FF;
 }
 
-.color-choice.active.red-circle {
-    background: linear-gradient(145deg, #E74C3C, #C0392B); /* Maintain original gradient */
-    box-shadow: 0 0 20px #00C8FF, 0 0 40px rgba(0, 200, 255, 0.6); /* Just glow */
-}
-.color-choice.active.green-circle {
-    background: linear-gradient(145deg, #2ECC71, #27AE60); /* Maintain original gradient */
-    box-shadow: 0 0 20px #00C8FF, 0 0 40px rgba(0, 200, 255, 0.6); /* Just glow */
+#wheel {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 8px solid #FFD700;
+    background: conic-gradient(
+        #2ECC71 0deg 45deg,
+        #C0392B 45deg 90deg,
+        #2ECC71 90deg 135deg,
+        #C0392B 135deg 180deg,
+        #2ECC71 180deg 225deg,
+        #C0392B 225deg 270deg,
+        #2ECC71 270deg 315deg,
+        #C0392B 315deg 360deg
+    );
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.2);
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-
-/* Wheel Section */
 .wheel-container {
     position: relative;
     display: inline-block;
-    margin: 2.5rem 0; /* More vertical space */
-}
-
-.wheel {
-    width: 300px; /* Even larger wheel */
-    height: 300px;
-    border-radius: 50%;
-    border: 15px solid #FFD700; /* Thicker gold border */
-    background: conic-gradient(
-        #2ecc71 0deg 45deg, /* Green */
-        #e74c3c 45deg 90deg,  /* Red */
-        #2ecc71 90deg 135deg,
-        #e74c3c 135deg 180deg,
-        #2ecc71 180deg 225deg,
-        #e74c3c 225deg 270deg,
-        #2ecc71 270deg 315deg,
-        #e74c3c 315deg 360deg
-    );
-    box-shadow:
-        inset 0 0 40px rgba(0, 0, 0, 0.9), /* Deeper inset shadow */
-        inset 0 0 100px rgba(0, 0, 0, 0.5),
-        0 0 40px rgba(255, 215, 0, 0.8), /* Stronger outer gold glow */
-        0 0 70px rgba(255, 215, 0, 0.4);
-    background-clip: padding-box; /* Ensures border is not affected by background */
-    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1); /* Custom cubic-bezier for natural spin */
+    margin: 20px 0;
 }
 
 .pointer {
     position: absolute;
-    top: -35px; /* Adjusted position higher above the wheel */
+    top: -16px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 3rem; /* Larger pointer icon */
-    color: #FFFFFF; /* White pointer */
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 25px rgba(255, 255, 255, 0.6); /* Intense pointer glow */
-    z-index: 10; /* Ensure pointer is on top */
+    font-size: 1.8rem;
+    color: #FFFFFF;
 }
 
-/* Buttons */
-button {
-    padding: 0.9rem 2.5rem; /* More padding */
-    margin: 0.8rem; /* Consistent margin */
-    font-size: 1.25rem; /* Larger font */
-    font-weight: 700; /* Bolder text */
-    border: 3px solid #FFD700; /* Thicker gold border */
-    background: linear-gradient(145deg, #2a2a3a, #0d0d1a); /* Dark blue-gray gradient */
-    color: #FFD700; /* Gold text */
-    border-radius: 0.8rem; /* More rounded corners (12.8px) */
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6); /* Deeper button shadow */
-    letter-spacing: 0.08em; /* More letter spacing */
-    text-transform: uppercase; /* Uppercase text for buttons */
-}
-
-button:hover:enabled {
-    background: linear-gradient(145deg, #FFD700, #e6b800); /* Inverted gold gradient on hover */
-    color: #0d0d1a; /* Dark text on hover */
-    box-shadow: 0 0 25px #FFD700, 0 0 40px rgba(255, 215, 0, 0.6); /* Stronger gold glow */
-    transform: translateY(-3px) scale(1.02); /* More noticeable lift and slight scale */
-}
-
-button:disabled {
-    opacity: 0.35; /* Even lower opacity for disabled */
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
-    background: #2a2a3a;
-    color: #777;
-    border-color: #777;
-}
-
-/* Result Display */
 #result-container {
-    min-height: 3.5em; /* Increased height to accommodate larger text/padding */
+    min-height: 2.5em; /* Fixed height prevents layout shift */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1.5rem 0; /* 24px margin */
 }
 
 #result {
-    font-size: 1.8rem; /* Larger result text */
-    font-weight: 700;
-    color: #FFD700; /* Default gold color */
-    transition: all 0.5s ease-in-out; /* Slower transition for result changes */
-    letter-spacing: 0.04em;
-    padding: 0.5rem 1rem; /* Some padding around text */
-    border-radius: 0.5rem;
+    font-size: 1.3rem;
+    color: #FFD700;
+    transition: 0.3s;
 }
 
 #result.win {
-    color: #00C8FF; /* Cyan win color */
-    text-shadow: 0 0 20px #00C8FF, 0 0 35px rgba(0, 200, 255, 0.7); /* Intense cyan glow */
-    transform: scale(1.1); /* More pronounced scale on win */
-    background: rgba(0, 200, 255, 0.1); /* Subtle background for win */
+    color: #00C8FF;
+    text-shadow: 0 0 10px #00C8FF;
 }
 
 #result.lose {
-    color: #E74C3C; /* Bright red lose color */
-    text-shadow: 0 0 20px #E74C3C, 0 0 35px rgba(231, 76, 60, 0.7); /* Intense red glow */
-    transform: scale(1.1); /* More pronounced scale on lose */
-    background: rgba(231, 76, 60, 0.1); /* Subtle background for lose */
+    color: #FFD700;
+    text-shadow: none;
 }
-
-/* Optional: Add a custom scrollbar for overall aesthetic if needed */
-/* Though generally not recommended unless strictly necessary for design */
-/*
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: #0b0b0b;
-}
-::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #888;
-}
-*/
