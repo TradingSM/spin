@@ -7,40 +7,49 @@
     <link rel="stylesheet" href="style.css"/>
     <link rel="icon" href="icon-192.png" type="image/png">
     <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Aldrich&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="background-overlay"></div>
     <div class="container">
 
-        <div class="logo-container">
+        <header class="game-header">
             <img src="logo.png" alt="Diamond Roulette Logo" class="logo">
-        </div>
-
-        <div class="diamonds">💎 Diamonds: <span id="diamonds">100</span></div>
-
-        <div class="stake-container">
-            <label for="stake">Stake:</label>
-            <input type="number" id="stake" min="1" value="10" step="1" inputmode="numeric" aria-label="Enter your stake amount">
-        </div>
-
-        <div class="choice-container">
-            <div class="color-choice red-circle active" data-color="red" role="radio" aria-checked="true" tabindex="0" aria-label="Choose Red"></div>
-            <div class="color-choice green-circle" data-color="green" role="radio" aria-checked="false" tabindex="0" aria-label="Choose Green"></div>
-        </div>
-
-        <div class="wheel-container">
-            <div class="wheel" id="wheel"></div>
-            <div class="pointer"></div>
-            <div class="wheel-center">
-                <span>SPIN!</span>
+            <div class="diamonds-display">
+                <span class="diamond-icon">◆</span> Diamonds: <span id="diamonds">100</span>
             </div>
-        </div>
+        </header>
 
-        <button id="spin" aria-label="Spin Roulette Wheel">Spin Roulette</button>
-        <div id="result-container">
-            <div id="result" aria-live="polite"> </div>
-        </div>
-        <button id="reset" aria-label="Reset Diamonds to 100">Reset to 100</button>
+        <main class="game-area">
+            <div class="controls-section">
+                <div class="stake-control">
+                    <label for="stake" class="control-label">STAKE</label>
+                    <input type="number" id="stake" min="1" value="10" step="1" inputmode="numeric" aria-label="Enter your stake amount">
+                </div>
+
+                <div class="choice-selection">
+                    <div class="color-choice red-circle active" data-color="red" role="radio" aria-checked="true" tabindex="0" aria-label="Choose Red"></div>
+                    <div class="color-choice green-circle" data-color="green" role="radio" aria-checked="false" tabindex="0" aria-label="Choose Green"></div>
+                </div>
+            </div>
+
+            <div class="wheel-section">
+                <div class="wheel-container">
+                    <div class="wheel" id="wheel"></div>
+                    <div class="pointer"></div>
+                    <div class="wheel-center">
+                        <span class="spin-text">SPIN!</span>
+                    </div>
+                </div>
+                <button id="spin" class="spin-button" aria-label="Spin Roulette Wheel">Spin Roulette</button>
+            </div>
+            
+            <div id="result-container">
+                <div id="result" aria-live="polite">Place your bet!</div>
+            </div>
+
+            <button id="reset" class="reset-button" aria-label="Reset Diamonds to 100">Reset to 100</button>
+        </main>
     </div>
 
     <audio id="spinSound" src="spin.mp3" preload="auto"></audio>
