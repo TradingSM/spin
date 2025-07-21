@@ -5,17 +5,17 @@ const GAME_CONFIG = {
     extraSpins: 5, // Number of full 360 rotations for realistic spin
     wheelSegments: 8, // Total segments on the wheel (must match CSS)
     // segmentMap defines the color for each 45-degree segment, starting from 0 (top) clockwise.
-    // Ensure this directly corresponds to your CSS conic-gradient.
-    // Example: [Green (0-45), Red (45-90), Green (90-135), ...]
+    // IMPORTANT: This MUST perfectly match the order in your style.css conic-gradient.
+    // Current CSS conic-gradient starts with RED from 0-45deg.
     segmentMap: [
-        'green', // 0-45
-        'red',   // 45-90
-        'green', // 90-135
-        'red',   // 135-180
-        'green', // 180-225
-        'red',   // 225-270
-        'green', // 270-315
-        'red'    // 315-360
+        'red',   // 0-45 degrees (Segment 0)
+        'green', // 45-90 degrees (Segment 1)
+        'red',   // 90-135 degrees (Segment 2)
+        'green', // 135-180 degrees (Segment 3)
+        'red',   // 180-225 degrees (Segment 4)
+        'green', // 225-270 degrees (Segment 5)
+        'red',   // 270-315 degrees (Segment 6)
+        'green'  // 315-360 degrees (Segment 7)
     ]
 };
 
@@ -35,7 +35,7 @@ const loseSound = document.getElementById('loseSound');
 
 // --- Game State Variables ---
 let diamonds = GAME_CONFIG.initialDiamonds;
-let currentRotation = 0;
+let currentRotation = 0; // Stores the cumulative rotation value
 let chosenColor = 'red'; // Default selected color
 let spinning = false;
 
@@ -54,7 +54,7 @@ function initializeGame() {
     redChoice.classList.add('active');
     redChoice.setAttribute('aria-checked', 'true');
 
-    // Set wheel transition property once
+    // Set wheel transition property once for smoother animation
     wheel.style.transition = `transform ${GAME_CONFIG.spinDuration / 1000}s cubic-bezier(0.33, 1, 0.68, 1)`;
 }
 
@@ -85,18 +85,18 @@ spinButton.addEventListener('click', () => {
 
     // Input Validation
     if (isNaN(stake) || stake <= 0) {
-        updateResultMessage("❗ Invalid stake amount.", "error");
+        updateResultMessage("❗ Invalid stake amount. Please enter a positive number.", "error");
         return;
     }
     if (stake > diamonds) {
-        updateResultMessage("❗ Cannot bet more than your diamonds.", "error");
+        updateResultMessage("❗ Cannot bet more than your diamonds. Reduce your stake.", "error");
         return;
     }
 
     // --- Start Spin ---
     spinning = true;
     spinButton.disabled = true;
-    updateResultMessage("Spinning...");
+    updateResultMessage("Spinning..."); // Clear previous message
     
     diamonds -= stake;
     diamondsEl.textContent = diamonds;
@@ -107,20 +107,40 @@ spinButton.addEventListener('click', () => {
         spinSound.play();
     }
 
-    // Calculate random degrees and total rotation for the spin
-    // Ensure randomDegrees results in a precise landing within a segment
-    // We want the pointer to land precisely at the *center* of a winning/losing segment.
-    // Each segment is 45 degrees. The center of a segment is 22.5, 67.5, 112.5, etc.
-    const segmentAngle = 360 / GAME_CONFIG.wheelSegments; // 45 degrees
+    // Calculate the target angle for the spin.
+    // We want the pointer to land precisely at the *center* of a randomly chosen segment.
+    const segmentAngle = 360 / GAME_CONFIG.wheelSegments; // E.g., 45 degrees for 8 segments
     const randomSegmentIndex = Math.floor(Math.random() * GAME_CONFIG.wheelSegments);
     
-    // Calculate the target angle so the pointer lands in the middle of a segment
-    // E.g., for segment 0 (0-45deg), center is 22.5deg. For segment 1 (45-90deg), center is 67.5deg.
+    // Calculate the target angle for the wheel to stop at the center of the chosen segment.
+    // The pointer is fixed at the top (0 degrees).
+    // If segment 0 is 0-45, its center is 22.5.
+    // If segment 1 is 45-90, its center is 67.5.
     const targetAngleWithinWheel = (randomSegmentIndex * segmentAngle) + (segmentAngle / 2);
     
-    // Add full rotations for visual effect. Ensure the final rotation is positive.
-    currentRotation = (currentRotation - (currentRotation % 360)) + (360 * GAME_CONFIG.extraSpins) + targetAngleWithinWheel;
+    // Add multiple full rotations for visual effect to make it look like a good spin.
+    // We need to ensure the new rotation value is always higher than the current one to spin forward.
+    // Also, we add a random offset within 360 degrees to ensure it doesn't always land precisely same way if you change logic.
+    const fullSpins = 360 * GAME_CONFIG.extraSpins;
     
+    // Ensure the wheel always spins in the same direction and lands on a specific point.
+    // `currentRotation` is cumulative. We want the *visual* landing angle to be `targetAngleWithinWheel`.
+    // The trick is to ensure the final `currentRotation` effectively points to `targetAngleWithinWheel` when `mod 360`.
+    
+    // Let's make sure the current rotation value is reset to a baseline that ensures forward spinning
+    // without "unwinding" in weird ways if currentRotation gets too large.
+    // Get current visual angle:
+    const currentVisualAngle = currentRotation % 360; 
+    let rotationNeeded = targetAngleWithinWheel - currentVisualAngle;
+
+    // If target is behind current, add a full spin to ensure forward motion
+    if (rotationNeeded < 0) {
+        rotationNeeded += 360;
+    }
+    
+    // Add extra full spins for dramatic effect
+    currentRotation += fullSpins + rotationNeeded;
+
     wheel.style.transform = `rotate(${currentRotation}deg)`;
 
     // --- End Spin Logic ---
@@ -130,13 +150,9 @@ spinButton.addEventListener('click', () => {
             spinSound.currentTime = 0; // Reset sound for next spin
         }
 
-        // Determine the actual stopping angle relative to 0-359
-        // The wheel rotated clockwise. The pointer is fixed at the top (0 degrees).
-        // If the wheel has rotated X degrees, the angle under the pointer is X % 360.
-        const normalizedAngle = currentRotation % 360; 
-        
-        // Find which segment this angle falls into
-        const resultColor = determineResultColor(normalizedAngle);
+        // Determine the actual stopping color based on `randomSegmentIndex`
+        // since we precisely targeted the center of that segment.
+        const resultColor = GAME_CONFIG.segmentMap[randomSegmentIndex];
 
         let resultMessage;
         let resultClass;
@@ -144,11 +160,11 @@ spinButton.addEventListener('click', () => {
         if (chosenColor === resultColor) {
             const winnings = stake * 2;
             diamonds += winnings;
-            resultMessage = `✅ ${resultColor.toUpperCase()} wins! You gain ${winnings} diamonds.`;
+            resultMessage = `✅ ${resultColor.toUpperCase()} WINS! You gain ${winnings} diamonds.`;
             resultClass = "win";
             if (winSound) winSound.play();
         } else {
-            resultMessage = `❌ ${resultColor.toUpperCase()} wins! You lose ${stake} diamonds.`;
+            resultMessage = `❌ ${resultColor.toUpperCase()} WINS! You lose ${stake} diamonds.`;
             resultClass = "lose";
             if (loseSound) loseSound.play();
         }
@@ -161,9 +177,10 @@ spinButton.addEventListener('click', () => {
         // Reset game if no diamonds left
         if (diamonds <= 0) {
             setTimeout(() => {
-                if (diamonds <= 0 && !spinning) {
+                // Ensure no double reset if user somehow gained diamonds quickly
+                if (diamonds <= 0 && !spinning) { 
                     updateResultMessage("You've run out of diamonds! Resetting...", "error");
-                    setTimeout(resetGame, 2000);
+                    setTimeout(resetGame, 2500); // Give user time to read before full reset
                 }
             }, 1000);
         }
@@ -174,38 +191,6 @@ spinButton.addEventListener('click', () => {
 resetButton.addEventListener('click', resetGame);
 
 // --- Helper Functions ---
-
-/**
- * Determines the winning color based on the final rotation angle.
- * This function is crucial for matching the visual wheel to the game logic.
- * It uses the `segmentMap` from GAME_CONFIG, which should accurately represent
- * the `conic-gradient` in style.css.
- *
- * @param {number} angle The normalized angle (0-359 degrees) where the wheel stopped.
- * This angle is relative to the wheel's original 0-degree point,
- * which is directly under the fixed pointer.
- * @returns {string} The color that the pointer landed on ('red' or 'green').
- */
-function determineResultColor(angle) {
-    const segmentAngleSize = 360 / GAME_CONFIG.wheelSegments; // 45 degrees for 8 segments
-    
-    // Calculate which segment the angle falls into
-    // Example:
-    // angle = 20  -> floor(20 / 45) = 0 (Segment 0)
-    // angle = 60  -> floor(60 / 45) = 1 (Segment 1)
-    // angle = 350 -> floor(350 / 45) = 7 (Segment 7)
-    const segmentIndex = Math.floor(angle / segmentAngleSize);
-
-    // Use the pre-defined segment map for the color
-    if (segmentIndex >= 0 && segmentIndex < GAME_CONFIG.segmentMap.length) {
-        return GAME_CONFIG.segmentMap[segmentIndex];
-    }
-    
-    // Fallback in case of unexpected angle (shouldn't happen with correct logic)
-    console.error("Angle out of segment map range:", angle);
-    return GAME_CONFIG.segmentMap[0]; // Default to the first segment's color
-}
-
 
 /**
  * Updates the result message displayed to the user.
@@ -219,15 +204,15 @@ function updateResultMessage(message, className = "") {
 
 function resetGame() {
     diamonds = GAME_CONFIG.initialDiamonds;
-    currentRotation = 0; // Reset wheel rotation visually
+    currentRotation = 0; // Reset cumulative rotation for clean spins
     diamondsEl.textContent = diamonds;
     updateResultMessage("Game reset! Place your stake.", "");
     
-    // Reset wheel visual
+    // Visually reset wheel to 0 degrees
     wheel.style.transform = 'rotate(0deg)'; 
     
     chosenColor = 'red';
-    // Reset active color choice and aria-checked
+    // Reset active color choice and aria-checked state
     colorChoices.forEach(c => {
         c.classList.remove('active');
         c.setAttribute('aria-checked', 'false');
