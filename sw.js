@@ -1,6 +1,6 @@
 self.addEventListener('install', (e) => {
     e.waitUntil(
-        caches.open('diamond-roulette-v1.2').then((cache) => { // Updated cache version to force refresh
+        caches.open('diamond-roulette-v1.3').then((cache) => { // Updated cache version to force refresh
             return cache.addAll([
                 '/',
                 '/index.html',
@@ -12,7 +12,9 @@ self.addEventListener('install', (e) => {
                 '/logo.png',
                 '/spin.mp3',
                 '/win.mp3',
-                '/lose.mp3'
+                '/lose.mp3',
+                // Google Fonts - important for offline use and consistent look
+                'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Oswald:wght@400;700&display=swap'
             ]).catch(error => {
                 console.error('Failed to add assets to cache during install:', error);
             });
