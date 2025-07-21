@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css"/>
     <link rel="icon" href="icon-192.png" type="image/png">
     <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Aldrich&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -19,30 +20,39 @@
 
         <div class="stake-container">
             <label for="stake">Stake:</label>
-            <input type="number" id="stake" min="1" value="10" step="1">
+            <input type="number" id="stake" min="1" value="10" step="1" inputmode="numeric">
         </div>
 
         <div class="choice-container">
-            <div class="color-choice red-circle active" data-color="red"></div>
-            <div class="color-choice green-circle" data-color="green"></div>
+            <div class="color-choice red-circle active" data-color="red" aria-label="Choose Red"></div>
+            <div class="color-choice green-circle" data-color="green" aria-label="Choose Green"></div>
         </div>
 
         <div class="wheel-container">
             <div class="wheel" id="wheel"></div>
-            <div class="pointer">▼</div>
-        </div>
+            <div class="pointer"></div> <div class="wheel-center"></div> </div>
 
         <button id="spin">Spin Roulette</button>
         <div id="result-container">
-            <div id="result"> </div>
+            <div id="result" aria-live="polite"> </div>
         </div>
         <button id="reset">Reset to 100</button>
     </div>
 
+    <audio id="spinSound" src="spin.mp3" preload="auto"></audio>
+    <audio id="winSound" src="win.mp3" preload="auto"></audio>
+    <audio id="loseSound" src="lose.mp3" preload="auto"></audio>
+
     <script src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }).catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
         }
     </script>
 </body>
