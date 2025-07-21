@@ -20,23 +20,27 @@
 
         <div class="stake-container">
             <label for="stake">Stake:</label>
-            <input type="number" id="stake" min="1" value="10" step="1" inputmode="numeric">
+            <input type="number" id="stake" min="1" value="10" step="1" inputmode="numeric" aria-label="Enter your stake amount">
         </div>
 
         <div class="choice-container">
-            <div class="color-choice red-circle active" data-color="red" aria-label="Choose Red"></div>
-            <div class="color-choice green-circle" data-color="green" aria-label="Choose Green"></div>
+            <div class="color-choice red-circle active" data-color="red" role="radio" aria-checked="true" tabindex="0" aria-label="Choose Red"></div>
+            <div class="color-choice green-circle" data-color="green" role="radio" aria-checked="false" tabindex="0" aria-label="Choose Green"></div>
         </div>
 
         <div class="wheel-container">
             <div class="wheel" id="wheel"></div>
-            <div class="pointer"></div> <div class="wheel-center"></div> </div>
+            <div class="pointer"></div>
+            <div class="wheel-center">
+                <span>SPIN!</span>
+            </div>
+        </div>
 
-        <button id="spin">Spin Roulette</button>
+        <button id="spin" aria-label="Spin Roulette Wheel">Spin Roulette</button>
         <div id="result-container">
             <div id="result" aria-live="polite"> </div>
         </div>
-        <button id="reset">Reset to 100</button>
+        <button id="reset" aria-label="Reset Diamonds to 100">Reset to 100</button>
     </div>
 
     <audio id="spinSound" src="spin.mp3" preload="auto"></audio>
