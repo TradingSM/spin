@@ -18,7 +18,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Use min-height for better adaptability */
+    min-height: 100vh;
     margin: 0;
     overflow: hidden; /* Prevent body scroll if elements slightly exceed */
     -webkit-font-smoothing: antialiased;
@@ -35,10 +35,14 @@ body {
     transform: translateY(0);
     animation: fadeInContainer 1s ease-out forwards;
     position: relative;
-    overflow: hidden; /* For any internal overflow effects */
-    max-width: 90%; /* Max width for responsiveness */
-    width: 450px; /* Base width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    overflow: hidden;
+    max-width: 90%;
+    width: 450px;
+    box-sizing: border-box;
+    display: flex; /* Make container a flex container */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally within the container */
+    justify-content: flex-start; /* Align to top, then distribute space */
 }
 
 @keyframes fadeInContainer {
@@ -48,22 +52,22 @@ body {
 
 .logo-container {
     margin-bottom: 30px;
+    /* Ensure logo container is centered */
+    width: 100%; /* Take full width to allow auto margins to work */
+    display: flex;
+    justify-content: center;
 }
 
 .logo {
-    width: 100%; /* Make logo responsive */
+    width: 100%;
     max-width: 300px;
     height: auto;
     display: block;
-    margin: 0 auto;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-    animation: logoGlow 3s infinite alternate ease-in-out;
+    margin: 0 auto; /* Center the image within its container */
+    /* Subtler, static glow - removed animation as per feedback */
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7)); 
 }
 
-@keyframes logoGlow {
-    from { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)); }
-    to { filter: drop-shadow(0 0 25px rgba(255, 215, 0, 1)); }
-}
 
 button {
     padding: 14px 35px;
@@ -86,7 +90,7 @@ button:hover:enabled {
     color: var(--primary-bg);
     box-shadow: 0 0 25px var(--gold), 0 8px 30px rgba(0, 0, 0, 0.8);
     transform: translateY(-4px) scale(1.03);
-    border-color: #fff; /* White border on hover for contrast */
+    border-color: #fff;
 }
 
 button:active:enabled {
@@ -110,15 +114,15 @@ button:disabled {
     margin: 25px 0;
     color: #FFFFFF;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-    display: flex; /* For aligning icon/emoji */
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
 
-.diamonds .emoji { /* If you replace emoji with custom SVG, style accordingly */
+.diamonds .emoji {
     font-size: 2rem;
-    line-height: 1; /* Align with text */
+    line-height: 1;
 }
 
 
@@ -143,11 +147,11 @@ button:disabled {
     border-radius: 10px;
     text-align: center;
     box-shadow: inset 0 0 8px rgba(255, 215, 0, 0.3);
-    -moz-appearance: textfield; /* Hide arrows for Firefox */
+    -moz-appearance: textfield;
 }
 #stake::-webkit-inner-spin-button,
 #stake::-webkit-outer-spin-button {
-    -webkit-appearance: none; /* Hide arrows for Chrome/Safari */
+    -webkit-appearance: none;
     margin: 0;
 }
 
@@ -167,7 +171,7 @@ button:disabled {
     border: 4px solid transparent;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-    position: relative; /* For active glow */
+    position: relative;
 }
 
 .color-choice.red-circle {
@@ -193,7 +197,7 @@ button:disabled {
     position: relative;
     display: inline-block;
     margin: 30px 0;
-    width: 300px; /* Base size for the wheel area */
+    width: 300px;
     height: 300px;
     display: flex;
     justify-content: center;
@@ -205,30 +209,31 @@ button:disabled {
     height: 280px;
     border-radius: 50%;
     border: 10px solid var(--gold);
+    /* Corrected conic-gradient for proper red/green segmentation */
     background: conic-gradient(
-        var(--green-main) 0deg 45deg,
-        var(--red-main) 45deg 90deg,
-        var(--green-main) 90deg 135deg,
-        var(--red-main) 135deg 180deg,
-        var(--green-main) 180deg 225deg,
-        var(--red-main) 225deg 270deg,
-        var(--green-main) 270deg 315deg,
-        var(--red-main) 315deg 360deg
+        var(--green-main) 0deg 45deg,  /* Segment 1: Green */
+        var(--red-main) 45deg 90deg,   /* Segment 2: Red */
+        var(--green-main) 90deg 135deg, /* Segment 3: Green */
+        var(--red-main) 135deg 180deg,  /* Segment 4: Red */
+        var(--green-main) 180deg 225deg, /* Segment 5: Green */
+        var(--red-main) 225deg 270deg,  /* Segment 6: Red */
+        var(--green-main) 270deg 315deg, /* Segment 7: Green */
+        var(--red-main) 315deg 360deg   /* Segment 8: Red */
     );
     box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.5);
-    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1); /* Slower, smoother spin */
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
     position: relative;
-    overflow: hidden; /* Ensure inner elements don't spill */
+    overflow: hidden;
 }
 
 .wheel-center {
     position: absolute;
-    width: 80px; /* Size of the center circle */
+    width: 80px;
     height: 80px;
     background: linear-gradient(145deg, #444, #222);
     border: 5px solid var(--gold);
     border-radius: 50%;
-    z-index: 2; /* Above segments, below pointer */
+    z-index: 2;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.4);
     display: flex;
     justify-content: center;
@@ -238,13 +243,8 @@ button:disabled {
     color: var(--gold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    /* You could add a small diamond icon here */
 }
-/* Optional: If you want to put text in the center */
-.wheel-center::after {
-    content: "Spin!"; /* Or a diamond character/icon */
-    opacity: 0.8;
-}
+/* If you want to put text in the center, it's already in index.html */
 
 
 .pointer {
@@ -253,22 +253,22 @@ button:disabled {
     height: 0;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-top: 30px solid #FFFFFF; /* White pointer */
-    top: -15px; /* Adjust to point correctly */
+    border-top: 30px solid #FFFFFF;
+    top: -15px;
     left: 50%;
     transform: translateX(-50%);
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-    z-index: 3; /* Ensure pointer is above wheel and center */
+    z-index: 3;
 }
 
 
 #result-container {
-    min-height: 2.8em; /* Fixed height prevents layout shift */
+    min-height: 2.8em;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 15px;
-    position: relative; /* For absolute positioning of effects */
+    position: relative;
 }
 
 #result {
@@ -276,7 +276,7 @@ button:disabled {
     font-weight: bold;
     color: var(--gold);
     transition: all 0.3s ease-in-out;
-    min-width: 80%; /* Ensure message has space */
+    min-width: 80%;
 }
 
 #result.win {
@@ -286,13 +286,13 @@ button:disabled {
 }
 
 #result.lose {
-    color: var(--red-main);
+    color: var(--red-main); /* Changed to red as it's a loss, but matched with the --red-main variable */
     text-shadow: 0 0 15px var(--red-main), 0 0 25px rgba(192, 57, 43, 0.5);
     animation: loseShake 0.6s ease-in-out;
 }
 
 #result.error {
-    color: #E74C3C; /* Brighter red for distinct errors */
+    color: #E74C3C;
     text-shadow: 0 0 8px rgba(231, 76, 60, 0.6);
     font-weight: normal;
 }
